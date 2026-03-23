@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AKO: Agentic Kernel Optimization</title>
+  <meta name="description" content="AKO provides optimization environments for coding agents to achieve competitive GPU kernel performance.">
+  <link rel="icon" href="assets/favicon.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══ Top Bar ═══ -->
+  <header class="topbar">
+    <a href="#" class="topbar-brand">
+      AKO <span>Agentic Kernel Optimization</span>
+    </a>
+    <div class="topbar-right">
+      <a href="https://github.com/TongmingLAIC/AKO4ALL" class="topbar-link hide-mobile">GitHub</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">&#9789;</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ═══ Layout ═══ -->
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <ul class="sidebar-nav">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#motivation">Motivation</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#acknowledgments">Acknowledgments</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mobile overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+
+      <!-- Title Block -->
+      <section id="home" class="title-block">
+        <h1>AKO: Agentic Kernel Optimization</h1>
+
+        <div class="affiliation">
+          Beijing Tongming Lake Information Technology Application Innovation Center (TLAIC)
+        </div>
+
+        <div class="quick-links">
+          <a href="https://github.com/TongmingLAIC/AKO4ALL">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            AKO4ALL
+          </a>
+          <span class="coming-soon">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            AKO4FIB (Coming Soon)
+          </span>
+        </div>
+
+        <div class="highlight-box">
+          Achieve competitive GPU kernel performance in just hours, on virtually any hardware.
+        </div>
+      </section>
+
+      <!-- Hero Chart -->
+      <section class="hero-chart">
+        <a href="assets/sol_score_comparison.png" target="_blank">
+          <img src="assets/sol_score_comparison.png"
+               alt="SOL Score comparison: AKO4ALL vs baselines on SOL-ExecBench"
+               loading="eager">
+        </a>
+        <p class="hero-caption">
+          SOL Score comparison on 13 kernels from <a href="https://github.com/NVIDIA/SOL-ExecBench">SOL-ExecBench</a>.<br>
+          See <a href="#results">Experiment Results</a> for details.
+        </p>
+      </section>
+
+      <!-- Overview -->
+      <section id="overview" class="content-section">
+        <h2>Overview</h2>
+        <p>
+          AKO is <strong>not</strong> a new agent or model &mdash; it is a <strong>harness</strong>
+          (optimization environment) for existing coding agents such as
+          <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>.
+          It places the agent into a well-structured environment where the evaluation criteria,
+          benchmarking tools, profiling interfaces, and optimization trajectory are all clearly
+          defined and readily accessible.
+        </p>
+        <p>
+          The agent retains full autonomy: it decides when to read code, rewrite kernels,
+          run benchmarks, invoke the profiler, search the web, or switch languages entirely.
+          AKO simply provides the right environment for it to do so effectively.
+        </p>
+        <p>
+          Two harnesses are available: <strong>AKO4ALL</strong> for general-purpose kernel
+          optimization with maximum flexibility, and <strong>AKO4FIB</strong> for standardized
+          optimization against
+          <a href="https://github.com/flashinfer-ai/flashinfer-bench">flashinfer-bench</a> operators.
+        </p>
+      </section>
+
+      <!-- Motivation -->
+      <section id="motivation" class="content-section">
+        <h2>Motivation</h2>
+        <p>
+          AKO grew out of our experience in the
+          <a href="https://mlsys26.flashinfer.ai/">NVIDIA Track | MLSys 2026 FlashInfer AI Kernel Generation Contest</a>.
+          During the competition, we found that existing approaches &mdash; search-based methods
+          and fixed-workflow systems that treat the model as a one-shot generation black box &mdash;
+          performed far worse than simply letting
+          <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>
+          optimize kernels directly.
+        </p>
+        <p>
+          Our key insight is that prior methods either heavily constrain model capabilities,
+          or hand decision-making to external search algorithms while keeping the model
+          under-informed &mdash; without a complete optimization trajectory, and without
+          the ability to freely inspect error messages and profiling data. As models evolve
+          rapidly,
+          approaches that <em>restrict</em> their capabilities become increasingly
+          counter-productive. Stronger models deserve fewer constraints, not more.
+        </p>
+        <p>
+          Based on this, we chose to build a better <strong>harness</strong> for existing
+          coding agents rather than building yet another agent or model.
+        </p>
+      </section>
+
+      <!-- Tools -->
+      <section id="tools" class="content-section">
+        <h2>Tools</h2>
+        <p>
+          AKO ships two harnesses that share the same philosophy &mdash; empower the agent,
+          don&rsquo;t constrain it &mdash; but target different use cases.
+        </p>
+
+        <div class="tool-item">
+          <span class="tool-tag">All Kernels &middot; All Hardware &middot; All Languages</span>
+          <h3>AKO4ALL</h3>
+          <p>
+            A completely open, minimal harness. You provide just a kernel &mdash; and optionally
+            a reference implementation, a custom benchmark script, context documents, or hints.
+            The agent has maximum freedom to optimize however it sees fit.
+          </p>
+          <ul>
+            <li>Built-in <a href="https://github.com/ScalingIntelligence/KernelBench">KernelBench</a> evaluator supporting Triton, CUDA, C++, TileLang, CuTe DSL, HIP, and Python</li>
+            <li>Or bring your own benchmark &mdash; any evaluation script works</li>
+            <li>Fully open architecture: the agent can freely switch languages, restructure code, or change strategy</li>
+            <li>Automatic trajectory recording and git integration</li>
+          </ul>
+          <p>
+            <strong>Trade-off:</strong> maximum flexibility means optimization stability depends
+            more on the model&rsquo;s own capability. Best for ad-hoc kernels, custom workloads,
+            rapid prototyping, and non-standard evaluation setups.
+          </p>
+          <div class="tool-link">
+            <a href="https://github.com/TongmingLAIC/AKO4ALL">View on GitHub &rarr;</a>
+          </div>
+        </div>
+
+        <div class="tool-item">
+          <span class="tool-tag">FlashInfer-Bench &middot; Standardized &middot; Production-Ready</span>
+          <h3>AKO4FIB</h3>
+          <p>
+            Built on the <a href="https://github.com/flashinfer-ai/flashinfer-bench">flashinfer-bench</a>
+            SDK. Uses its data format (flashinfer-trace), benchmark infrastructure, and profiling tools.
+            <code>spawn.py</code> creates isolated, self-contained optimization environments per operator.
+          </p>
+          <ul>
+            <li>Supports Triton, CUDA, C++, TileLang, CuTe DSL, and Python</li>
+            <li>Structured operator definitions with axes, workloads, and reference implementations</li>
+            <li>Standardized per-workload scoring with automatic baseline caching</li>
+            <li>Integrated NCU profiling with structured output</li>
+            <li>Trajectory recording with full results metadata</li>
+            <li>Local GPU and <a href="https://modal.com/">Modal</a> cloud backends</li>
+          </ul>
+          <p>
+            <strong>Trade-off:</strong> more constrained (flashinfer-bench format requirements),
+            but provides a more stable environment, more accurate evaluation, and a direct path
+            to production integration. Best for flashinfer-bench operators, the
+            <a href="https://mlsys26.flashinfer.ai/">MLSys contest</a>,
+            attention/sparse-attention kernels, and reproducible evaluations.
+          </p>
+          <div class="tool-link">
+            <span class="coming-soon">Coming Soon</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experiment Results -->
+      <section id="results" class="content-section">
+        <h2>Experiment Results</h2>
+        <p>
+          We evaluated <strong>AKO4ALL</strong> on <strong>13 kernels</strong> from
+          <a href="https://github.com/NVIDIA/SOL-ExecBench">SOL-ExecBench</a>
+          (Level&nbsp;1, Level&nbsp;2, and
+          <a href="https://github.com/flashinfer-ai/flashinfer-bench">flashinfer-bench</a>).
+          <strong>10 out of 13 kernels</strong> outperform the Scoring Baseline
+          (NVIDIA multi-agent optimized kernel).
+        </p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">0.61</div>
+            <div class="stat-label">Avg SOL Score</div>
+            <div class="stat-note">vs Baseline 0.50</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">1.99&times;</div>
+            <div class="stat-label">Avg Speedup</div>
+            <div class="stat-note">vs Scoring Baseline</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">13.71&times;</div>
+            <div class="stat-label">Avg Speedup</div>
+            <div class="stat-note">vs PyTorch Reference</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">10 / 13</div>
+            <div class="stat-label">Beat Scoring Baseline</div>
+          </div>
+        </div>
+
+        <h3>Configuration</h3>
+        <ul>
+          <li><strong>Coding agent:</strong> <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> (Opus 4.6)</li>
+          <li><strong>Development hardware:</strong> NVIDIA A100-SXM4-80GB</li>
+          <li><strong>Evaluation:</strong> SOL-ExecBench online platform (B200 hardware)</li>
+          <li><strong>Time per kernel:</strong> 1&ndash;2 hours</li>
+          <li>We did not have direct access to B200 with NCU profiling privileges, creating an inherent disadvantage compared to local optimization on the target hardware.</li>
+        </ul>
+
+        <h3>Observations</h3>
+        <ul>
+          <li><strong>Optimization avoidance</strong> &mdash; Claude Code occasionally avoids deep kernel-level optimization, defaulting to surface-level tuning such as adjusting launch configurations instead of rewriting compute logic.</li>
+          <li><strong>Language preference</strong> &mdash; Claude Code strongly favors Triton and CUDA, and shows limited proficiency with other kernel DSLs (e.g., TileLang, CuTe DSL).</li>
+          <li><strong>Cross-architecture regression</strong> &mdash; CUDA kernels iteratively optimized on A100 often exhibit performance degradation when evaluated on B200, likely due to architectural differences between the development and evaluation hardware.</li>
+        </ul>
+
+        <h3>Future Work</h3>
+        <ul>
+          <li>Optimize on B200 with NCU privileges for evaluation-aligned iteration</li>
+          <li>Run more optimization iterations per kernel</li>
+          <li>Expert-guided optimization during the process</li>
+        </ul>
+      </section>
+
+      <!-- Acknowledgments -->
+      <section id="acknowledgments" class="content-section">
+        <h2>Acknowledgments</h2>
+        <p>
+          We would like to thank the following open-source projects that inspired and supported the development of AKO:
+        </p>
+        <ul>
+          <li><a href="https://github.com/ScalingIntelligence/KernelBench">KernelBench</a> &mdash; for providing the benchmark and evaluation format used by AKO4ALL&rsquo;s built-in evaluator.</li>
+          <li><a href="https://flashinfer.ai/">FlashInfer</a> &mdash; for the LLM inference kernel library and the <a href="https://github.com/flashinfer-ai/flashinfer-bench">flashinfer-bench</a> benchmark infrastructure on which AKO4FIB is built.</li>
+          <li><a href="https://github.com/karpathy/autoresearch">autoresearch</a> and <a href="https://github.com/RightNow-AI/autokernel">autokernel</a> &mdash; AKO&rsquo;s design was inspired by their work on autonomous optimization loops.</li>
+        </ul>
+      </section>
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="footer-links">
+          <a href="https://github.com/TongmingLAIC/AKO4ALL">AKO4ALL</a>
+          <span>AKO4FIB (Coming Soon)</span>
+        </div>
+        <p class="footer-credit">AKO is open source. Built for GPU kernel developers.</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- ═══ Minimal JS: Theme Toggle + Scroll Spy + Mobile Menu ═══ -->
+  <script>
+    // Theme toggle
+    (function () {
+      const toggle = document.getElementById('themeToggle');
+      const root = document.documentElement;
+
+      // Detect initial theme
+      const stored = localStorage.getItem('ako-theme');
+      if (stored) {
+        root.setAttribute('data-theme', stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        root.setAttribute('data-theme', 'dark');
+      }
+      updateIcon();
+
+      toggle.addEventListener('click', function () {
+        const current = root.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('ako-theme', next);
+        updateIcon();
+      });
+
+      function updateIcon() {
+        const theme = root.getAttribute('data-theme');
+        toggle.textContent = theme === 'dark' ? '\u2600' : '\u263D';
+      }
+    })();
+
+    // Scroll spy
+    (function () {
+      const links = document.querySelectorAll('.sidebar-nav a');
+      const sections = [];
+
+      links.forEach(function (link) {
+        const id = link.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) sections.push({ id: id, el: el, link: link });
+      });
+
+      function onScroll() {
+        const scrollY = window.scrollY + 80;
+        let activeId = sections[0] ? sections[0].id : null;
+
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].el.offsetTop <= scrollY) {
+            activeId = sections[i].id;
+          }
+        }
+
+        links.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // Mobile menu
+    (function () {
+      const menuBtn = document.getElementById('menuToggle');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('visible');
+      }
+
+      menuBtn.addEventListener('click', function () {
+        const isOpen = sidebar.classList.contains('open');
+        if (isOpen) {
+          closeSidebar();
+        } else {
+          sidebar.classList.add('open');
+          overlay.classList.add('visible');
+        }
+      });
+
+      overlay.addEventListener('click', closeSidebar);
+
+      // Close sidebar when a link is clicked (mobile)
+      document.querySelectorAll('.sidebar-nav a').forEach(function (link) {
+        link.addEventListener('click', closeSidebar);
+      });
+    })();
+
+  </script>
+
+</body>
+</html>
