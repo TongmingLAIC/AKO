@@ -269,8 +269,7 @@ a:hover {
   text-decoration: none;
 }
 
-.quick-links .coming-soon,
-.tool-link .coming-soon {
+.quick-links .tech-report-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
