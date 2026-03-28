@@ -1,4 +1,5 @@
-# AKO — Agentic Kernel Optimization
+<h1 align="center">AKO</h1>
+<p align="center"><b>Agentic Kernel Optimization</b></p>
 
 <p align="center">
   <a href="https://tongminglaic.github.io/AKO"><img src="https://img.shields.io/badge/Project-Page-blue" alt="Project Page"></a>
