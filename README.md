@@ -16,7 +16,7 @@ Achieve competitive GPU kernel performance in just hours, on virtually any hardw
 
 ## News
 
-- 🎉 **[2026.03.28]** [AKO4FIB](https://github.com/TongmingLAIC/AKO4FIB) is now open source!
+- 📢 **[2026.03.28]** [AKO4FIB](https://github.com/TongmingLAIC/AKO4FIB) coming soon — will be open-sourced after the [MLSys 2026 competition](https://mlsys26.flashinfer.ai/).
 - 🚀 **[2026.03.24]** [AKO4ALL](https://github.com/TongmingLAIC/AKO4ALL) is released. Check out the [project page](https://tongminglaic.github.io/AKO).
 
 ## Overview
