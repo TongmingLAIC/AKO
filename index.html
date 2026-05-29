@@ -106,9 +106,10 @@
         </p>
         <p>
           Two harnesses are available: <strong>AKO4ALL</strong> for general-purpose kernel
-          optimization with maximum flexibility, and <strong>AKO4X</strong> for standardized
-          optimization against
-          <a href="https://github.com/flashinfer-ai/flashinfer-bench">flashinfer-bench</a> operators.
+          optimization with maximum flexibility, and <strong>AKO4X</strong> for campaign-grade
+          optimization — closed-loop, multi-round runs with cross-run memory and an extensible,
+          co-evolving harness (default benchmark:
+          <a href="https://github.com/flashinfer-ai/flashinfer-bench">flashinfer-bench</a>).
         </p>
       </section>
 
@@ -172,27 +173,30 @@
         </div>
 
         <div class="tool-item">
-          <span class="tool-tag">FlashInfer-Bench &middot; Standardized &middot; Production-Ready</span>
+          <span class="tool-tag">Closed-Loop &middot; Campaign-Based &middot; eXtensible</span>
           <h3>AKO4X</h3>
           <p>
-            Built on the <a href="https://github.com/flashinfer-ai/flashinfer-bench">flashinfer-bench</a>
-            SDK. Uses its data format (flashinfer-trace), benchmark infrastructure, and profiling tools.
-            <code>spawn.py</code> creates isolated, self-contained optimization environments per operator.
+            The advanced, eXtensible harness. A persistent master agent runs a multi-round
+            <em>campaign</em> on one operator: each round, <code>spawn.py</code> creates a fresh,
+            isolated child environment, and a per-operator archive accumulates every round's results
+            so each round builds on all the ones before it. Benchmark-swappable through a thin
+            adapter — default <a href="https://github.com/flashinfer-ai/flashinfer-bench">flashinfer-bench</a>
+            (flashinfer-trace format).
           </p>
           <ul>
+            <li>Multi-round campaigns: a master agent spawns one optimization round per isolated child environment, back-to-back</li>
+            <li>Per-operator archive of variants with lineage — each round is informed by all earlier rounds</li>
+            <li>Opt-in harness co-evolution: the agent can propose improvements to its own knowledge and tooling, gated and applied by the master</li>
             <li>Supports Triton, CUDA, C++, TileLang, CuTe DSL, and Python</li>
-            <li>Structured operator definitions with axes, workloads, and reference implementations</li>
-            <li>Standardized per-workload scoring with automatic baseline caching</li>
-            <li>Integrated NCU profiling with structured output</li>
-            <li>Trajectory recording with full results metadata</li>
+            <li>Per-workload scoring with baseline caching, integrated NCU profiling, trajectory recording, and anti-cheat checks</li>
             <li>Local GPU and <a href="https://modal.com/">Modal</a> cloud backends</li>
           </ul>
           <p>
-            <strong>Trade-off:</strong> more constrained (flashinfer-bench format requirements),
-            but provides a more stable environment, more accurate evaluation, and a direct path
-            to production integration. Best for flashinfer-bench operators, the
+            <strong>Trade-off:</strong> more infrastructure than AKO4ALL, but it buys cross-run
+            memory, reproducible per-workload evaluation, and an evolving optimization harness.
+            Best for sustained, multi-round campaigns on a fixed operator — the
             <a href="https://mlsys26.flashinfer.ai/">MLSys contest</a>,
-            attention/sparse-attention kernels, and reproducible evaluations.
+            attention/sparse-attention and other flagship inference kernels, and reproducible evaluation.
           </p>
           <div class="tool-link">
             <a href="https://github.com/TongmingLAIC/AKO4X">View on GitHub &rarr;</a>

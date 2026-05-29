@@ -32,7 +32,7 @@ AKO is **not** a new agent or model — it is a **harness** (optimization enviro
 | Tool | Description | Repo |
 |------|-------------|------|
 | **AKO4ALL** | Open, minimal harness for any kernel, any hardware, any language. Bring your own benchmark or use the built-in [KernelBench](https://github.com/ScalingIntelligence/KernelBench) evaluator. | [TongmingLAIC/AKO4ALL](https://github.com/TongmingLAIC/AKO4ALL) |
-| **AKO4X** | Standardized harness built on [flashinfer-bench](https://github.com/flashinfer-ai/flashinfer-bench). Structured evaluation, NCU profiling, trajectory recording, and production integration. | [TongmingLAIC/AKO4X](https://github.com/TongmingLAIC/AKO4X) |
+| **AKO4X** | Advanced, eXtensible harness: closed-loop multi-round campaigns with cross-run memory, master/sub agent separation, and opt-in harness co-evolution. Benchmark-swappable via a thin adapter (default [flashinfer-bench](https://github.com/flashinfer-ai/flashinfer-bench)). | [TongmingLAIC/AKO4X](https://github.com/TongmingLAIC/AKO4X) |
 
 ## Tech Report
 
