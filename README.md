@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="AKO logo" width="140" />
+</p>
+
 <h1 align="center">AKO</h1>
 <p align="center"><b>Agentic Kernel Optimization</b></p>
 
@@ -10,9 +14,17 @@
 
 <p align="center"><b>If you find our work useful, please consider giving us a star 🌟</b></p>
 
-Achieve competitive GPU kernel performance in just hours, on virtually any hardware.
+Achieve competitive GPU kernel performance in just hours.
 
 **[Visit the project homepage →](https://tongminglaic.github.io/AKO)**
+
+## Highlights
+
+- **[AKO4X](https://github.com/TongmingLAIC/AKO4X)** wins all **5/5** MLSys-2026 FlashInfer-Bench contest kernels head-to-head against the rival [KDA](https://github.com/mit-han-lab/kernel-design-agents) system — up to **30.71×** over the FlashInfer expert.
+- Beats the FlashInfer **expert** baseline across **10 operator families** on NVIDIA B200.
+- **[AKO4ALL](https://github.com/TongmingLAIC/AKO4ALL)**, the drop-in skill, beats the expert on all **4 inference operators** — one prompt, **~1h** per kernel.
+
+**[Full results on the project page →](https://tongminglaic.github.io/AKO#results)**
 
 ## News
 
