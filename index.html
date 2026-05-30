@@ -49,6 +49,8 @@
 
       <!-- Title Block -->
       <section id="home" class="title-block">
+        <div style="display:flex; align-items:flex-start; gap:32px;">
+        <div style="flex:1; min-width:0;">
         <h1>AKO: Agentic Kernel Optimization</h1>
 
         <div class="affiliation">
@@ -69,22 +71,25 @@
             Tech Report (Coming Soon)
           </span>
         </div>
+        </div>
+        <img src="assets/logo.png" alt="AKO logo" width="128" style="border-radius:22px; flex-shrink:0;" />
+        </div>
 
         <div class="highlight-box">
-          Achieve competitive GPU kernel performance in just hours, on virtually any hardware.
+          Achieve competitive GPU kernel performance in just hours.
         </div>
       </section>
 
       <!-- Hero Chart -->
       <section class="hero-chart">
-        <a href="assets/sol_score_comparison.png" target="_blank">
-          <img src="assets/sol_score_comparison.png"
-               alt="SOL Score comparison: AKO4ALL vs baselines on SOL-ExecBench"
+        <a href="assets/ako4x_vs_kda_contest.png" target="_blank">
+          <img src="assets/ako4x_vs_kda_contest.png"
+               alt="AKO4X vs KDA geomean speedup over the FlashInfer expert on the five MLSys-2026 contest kernels; AKO4X wins all five, DSA attention 30.71x."
                loading="eager">
         </a>
         <p class="hero-caption">
-          SOL Score comparison on 13 kernels from <a href="https://github.com/NVIDIA/SOL-ExecBench">SOL-ExecBench</a>.<br>
-          See <a href="#results">Experiment Results</a> for details.
+          AKO4X vs the <a href="https://github.com/mit-han-lab/kernel-design-agents">KDA</a> reference system on the 5 <a href="https://mlsys26.flashinfer.ai/">MLSys-2026</a> FlashInfer-Bench contest kernels, NVIDIA B200. Bars are geomean speedup over the FlashInfer <strong>expert</strong> baseline (dashed line = 1.0&times;) &mdash; AKO4X wins 5/5; the 5th (the baseline-free DSA top-k indexer) runs 1.27&times; faster than KDA, in the table below.<br>
+          See <a href="#results">Experiment Results</a> for the full breadth and the AKO4ALL companion.
         </p>
       </section>
 
@@ -152,8 +157,9 @@
           <span class="tool-tag">All Kernels &middot; All Hardware &middot; All Languages</span>
           <h3>AKO4ALL</h3>
           <p>
-            A completely open, minimal harness. You provide just a kernel &mdash; and optionally
-            a reference implementation, a custom benchmark script, context documents, or hints.
+            A completely open, minimal harness. You provide a kernel and at least one set of test
+            inputs &mdash; embedded in the kernel, as a data file, or via a benchmark script &mdash; and
+            optionally a reference implementation, context documents, or hints.
             The agent has maximum freedom to optimize however it sees fit.
           </p>
           <ul>
@@ -208,57 +214,114 @@
       <section id="results" class="content-section">
         <h2>Experiment Results</h2>
         <p>
-          We evaluated <strong>AKO4ALL</strong> on <strong>13 kernels</strong> from
-          <a href="https://github.com/NVIDIA/SOL-ExecBench">SOL-ExecBench</a>
-          (Level&nbsp;1, Level&nbsp;2, and
-          <a href="https://github.com/flashinfer-ai/flashinfer-bench">flashinfer-bench</a>).
-          <strong>10 out of 13 kernels</strong> outperform the Scoring Baseline
-          (NVIDIA multi-agent optimized kernel).
+          We evaluate AKO on the official
+          <a href="https://github.com/flashinfer-ai/flashinfer-bench">FlashInfer-Bench</a>
+          workloads, running <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>
+          inside each harness on an NVIDIA&nbsp;B200. Every number on this page is
+          <strong>speedup over the FlashInfer <em>expert</em> kernel</strong> &mdash; the strongest
+          hand-tuned baseline FlashInfer ships, profiled with the same isolated runner as our kernels.
+          We never mix denominators.
+        </p>
+        <p>
+          <strong>AKO4X</strong> is our campaign-grade harness and the headline result. Across
+          <strong>10 kernel families</strong> (471 workloads) it stays above the FlashInfer expert on
+          every family with a baseline &mdash; geomean <strong>1.14&ndash;1.43&times;</strong> across the
+          production-inference breadth families, up to <strong>2.30&times;</strong> on the GDN-prefill contest
+          kernel and <strong>30.71&times;</strong> on DSA sparse attention. On the
+          five <a href="https://mlsys26.flashinfer.ai/">MLSys-2026</a> contest kernels it beats the
+          <strong>KDA reference system on all five</strong>, while KDA itself drops below the expert on
+          two of them.
+        </p>
+        <p>
+          <strong>AKO4ALL</strong> is the lightweight, drop-in companion: a single skill you point at a
+          kernel, no campaign infrastructure. On the four shared operators we re-measure AKO4ALL against
+          the <em>same</em> FlashInfer expert so it lands on one apples-to-apples axis with AKO4X. With
+          zero campaign infrastructure it recovers 85&ndash;98% of AKO4X&rsquo;s geomean on three operators and
+          pulls slightly ahead on MLA prefill, though with a wider per-workload spread &mdash; the easy
+          on-ramp, while AKO4X is the campaign engine.
         </p>
 
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-value">0.61</div>
-            <div class="stat-label">Avg SOL Score</div>
-            <div class="stat-note">vs Baseline 0.50</div>
+            <div class="stat-value">31&times;</div>
+            <div class="stat-label">DSA attention vs expert</div>
+            <div class="stat-note">geomean 30.71&times; &middot; 23/23 pass</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">1.99&times;</div>
-            <div class="stat-label">Avg Speedup</div>
-            <div class="stat-note">vs Scoring Baseline</div>
+            <div class="stat-value">5 / 5</div>
+            <div class="stat-label">Contest kernels beat KDA</div>
+            <div class="stat-note">AKO4X &gt; KDA on every one</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">13.71&times;</div>
-            <div class="stat-label">Avg Speedup</div>
-            <div class="stat-note">vs PyTorch Reference</div>
+            <div class="stat-value">4 / 4</div>
+            <div class="stat-label">AKO4ALL drop-in beats expert</div>
+            <div class="stat-note">~1h, one prompt per kernel</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-value">10 / 13</div>
-            <div class="stat-label">Beat Scoring Baseline</div>
-          </div>
+        </div>
+
+        <h3>Contest kernels: AKO4X vs the KDA reference system</h3>
+        <div class="table-wrap">
+          <table class="result-table">
+            <thead>
+              <tr><th>Kernel</th><th>AKO4X<br><span class="th-sub">vs FlashInfer expert</span></th><th>KDA<br><span class="th-sub">vs FlashInfer expert</span></th><th>Workloads</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>DSA sparse attention</td><td class="win">30.71&times;</td><td>3.78&times;</td><td>23/23</td></tr>
+              <tr><td>GDN prefill</td><td class="win">2.30&times;</td><td>1.53&times;</td><td>100/100</td></tr>
+              <tr><td>MoE fp8 block-scale</td><td class="win">1.19&times;</td><td class="loss">0.59&times;</td><td>19/19</td></tr>
+              <tr><td>GDN decode</td><td class="win">1.17&times;</td><td class="loss">0.81&times;</td><td>54/54</td></tr>
+              <tr><td>DSA top-k indexer&nbsp;<span class="note-flag">&dagger;</span></td><td class="win">1.27&times; faster than KDA</td><td>&mdash; (ref)</td><td>128/128</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-foot">Geomean speedup over the FlashInfer <strong>expert</strong>; all workloads pass. <span class="note-flag">&dagger;</span> DSA indexer is baseline-free (the expert crashed on cu132) &mdash; shown as an AKO4X-vs-KDA latency comparison (0.0053&nbsp;ms vs 0.0067&nbsp;ms). Red = KDA loses to the expert.</p>
+
+        <h3>Additional families: AKO4X vs FlashInfer expert</h3>
+        <div class="table-wrap">
+          <table class="result-table">
+            <thead>
+              <tr><th>Family</th><th>Geomean</th><th>Range min&ndash;max</th><th>Workloads</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>GQA paged decode</td><td>1.43&times;</td><td>0.85&ndash;1.81</td><td>48/48</td></tr>
+              <tr><td>MLA paged decode</td><td>1.42&times;</td><td>0.84&ndash;1.98</td><td>47/47</td></tr>
+              <tr><td>MLA paged prefill</td><td>1.36&times;</td><td>0.82&ndash;2.37</td><td>38/38</td></tr>
+              <tr><td>RMSNorm h128</td><td>1.14&times;</td><td>0.96&ndash;1.67</td><td>14/14</td></tr>
+              <tr><td>GEMM n2048 k4096</td><td>1.00&times;</td><td>cuBLAS unbeaten</td><td>&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-foot">Production inference kernels, geomean 1.14&ndash;1.43&times; over the FlashInfer expert. Minima below 1.0&times; are launch-bound shapes; GEMM ties cuBLAS (we do not claim a GEMM win).</p>
+
+        <h3>AKO4ALL vs AKO4X on shared operators</h3>
+        <div class="results-chart">
+          <a href="assets/ako4all_vs_ako4x_shared_ops.png" target="_blank">
+            <img src="assets/ako4all_vs_ako4x_shared_ops.png" alt="Grouped bars comparing AKO4X (campaign system) and AKO4ALL (drop-in skill) on four shared operators, both vs the same FlashInfer expert; AKO4ALL within 85-100% of AKO4X and ahead on MLA prefill.">
+          </a>
+          <p class="chart-caption">AKO4ALL (drop-in skill) vs AKO4X (campaign system) on the four shared operators, same FlashInfer-expert denominator. The drop-in skill recovers 85&ndash;98% of the campaign system&rsquo;s geomean on three operators and pulls slightly ahead on MLA prefill (wider per-workload spread) &mdash; for zero campaign infrastructure.</p>
         </div>
 
         <h3>Configuration</h3>
         <ul>
-          <li><strong>Coding agent:</strong> <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> (Opus 4.6)</li>
-          <li><strong>Development hardware:</strong> NVIDIA A100-SXM4-80GB</li>
-          <li><strong>Evaluation:</strong> SOL-ExecBench online platform (B200 hardware)</li>
-          <li><strong>Time per kernel:</strong> 1&ndash;2 hours</li>
-          <li>We did not have direct access to B200 with NCU profiling privileges, creating an inherent disadvantage compared to local optimization on the target hardware.</li>
+          <li><strong>Coding agent:</strong> <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> &mdash; AKO4X on Claude Opus 4.7, AKO4ALL on Claude Opus 4.8 (both 1M context, max thinking effort)</li>
+          <li><strong>Hardware:</strong> NVIDIA B200, via <a href="https://modal.com/">Modal</a> cloud</li>
+          <li><strong>Software:</strong> CUDA 13.2, PyTorch 2.12, Triton 3.6, FlashInfer (from main)</li>
+          <li><strong>Benchmark:</strong> official <a href="https://github.com/flashinfer-ai/flashinfer-bench">FlashInfer-Bench</a> workloads (flashinfer-trace format)</li>
+          <li><strong>Baseline &amp; metric:</strong> the FlashInfer <strong>expert</strong> kernel (<code>flashinfer_wrapper_&lt;hash&gt;</code>), profiled once; speedup = expert latency / our latency per workload, aggregated as geomean. A run counts only if every workload passes correctness.</li>
         </ul>
 
         <h3>Observations</h3>
         <ul>
-          <li><strong>Optimization avoidance</strong> &mdash; Claude Code occasionally avoids deep kernel-level optimization, defaulting to surface-level tuning such as adjusting launch configurations instead of rewriting compute logic.</li>
-          <li><strong>Language preference</strong> &mdash; Claude Code strongly favors Triton and CUDA, and shows limited proficiency with other kernel DSLs (e.g., TileLang, CuTe DSL).</li>
-          <li><strong>Cross-architecture regression</strong> &mdash; CUDA kernels iteratively optimized on A100 often exhibit performance degradation when evaluated on B200, likely due to architectural differences between the development and evaluation hardware.</li>
+          <li><strong>Single denominator, end to end.</strong> AKO4X and AKO4ALL are measured against the same FlashInfer expert with the same isolated runner &mdash; we never mix baselines.</li>
+          <li><strong>Honest negatives.</strong> Some launch-bound attention/norm workloads dip below 1.0&times; (min 0.82&ndash;0.96), and GEMM ties cuBLAS at 1.00&times; &mdash; we report geomean <em>and</em> min&ndash;max rather than cherry-picking.</li>
+          <li><strong>Instance noise is real.</strong> Modal B200 cannot clock-lock, so we rank by the drift-robust geomean ratio (expert and kernel timed back-to-back in one container), not single-point latencies.</li>
+          <li><strong>DSA sparse attention is the standout</strong> (30.71&times; geomean, 23/23), from a sparse rewrite the expert wrapper does not exploit.</li>
         </ul>
 
         <h3>Future Work</h3>
         <ul>
-          <li>Optimize on B200 with NCU privileges for evaluation-aligned iteration</li>
-          <li>Run more optimization iterations per kernel</li>
-          <li>Expert-guided optimization during the process</li>
+          <li>Extend coverage to the scaffolded-but-unrun ops (GQA prefill, FP8 MoE).</li>
+          <li>Clock-locked re-runs to tighten the per-workload speedup confidence intervals.</li>
         </ul>
       </section>
 

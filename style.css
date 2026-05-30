@@ -487,7 +487,7 @@ a:hover {
 /* ── Stats Grid (Experiment Results) ────────────────────── */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin: 20px 0 24px;
 }
@@ -529,6 +529,56 @@ a:hover {
   height: auto;
   border-radius: var(--radius);
   border: 1px solid var(--border);
+}
+
+.chart-caption {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 8px;
+}
+
+/* ── Result Tables ───────────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.result-table th,
+.result-table td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-table thead th {
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  vertical-align: bottom;
+}
+
+.result-table .th-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.result-table td.win  { color: var(--accent); font-weight: 600; }
+.result-table td.loss { color: #ef4444; }
+.result-table .note-flag { color: var(--text-dim); }
+
+.table-foot {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-top: 6px;
 }
 
 /* ── Footer ──────────────────────────────────────────────── */
